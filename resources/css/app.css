@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .input-style {
+        @apply p-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-200 text-sm bg-transparent caret-white text-white;
+    }
+    .nav-button{
+        @apply cursor-pointer rounded-lg hover:bg-slate-500 p-2 box-border align-middle hover:text-slate-800
+    }
+    .icon-size{
+        @apply w-8 h-8
+    }
+    .modal-input{
+        @apply p-2 border border-gray-300 rounded-md focus:outline-none focus:border-slate-800 text-sm bg-transparent ;
+    }
+}
