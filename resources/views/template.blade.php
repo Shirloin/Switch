@@ -8,7 +8,6 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     @livewireStyles
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="//unpkg.com/alpinejs" defer></script>
     {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
@@ -16,11 +15,11 @@
 </head>
 
 <body>
-    {{-- @include('components.background') --}}
-    <div class="min-h-screen min-w-screen flex flex-col justify-between items-center z-50 bg-slate-800">
-        <x-navbar />
-        @yield('content')
-        {{-- @include('components.footer') --}}
+    <div class="min-h-screen min-w-screen flex flex-col items-center justify-between bg-slate-800">
+        <div class="h-full w-full flex flex-col items-center">
+            <x-navbar />
+            @yield('content')
+        </div>
     </div>
     @livewire('livewire-ui-modal')
     @livewireScripts

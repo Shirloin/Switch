@@ -1,5 +1,5 @@
-<div class="relative h-20 w-full z-50">
-    <div class="fixed top-0 left-0 right-0 h-20 bg-slate-800 border-b-2 border-solid border-slate-500 ">
+<div class="relative h-20 w-full z-30">
+    <div class="fixed top-0 left-0 right-0 bg-slate-800 border-b-2 border-solid border-slate-500 ">
         <div class="w-full h-full box-border flex justify-center items-center lg:px-12 p-6">
             <div class="w-full h-full flex justify-between items-center lg:gap-8 gap-2 ">
                 <div class="h-full flex justify-center items-center">

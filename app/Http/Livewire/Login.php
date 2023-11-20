@@ -2,11 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use LivewireUI\Modal\ModalComponent;
-use Yoeunes\Toastr\Facades\Toastr;
 
 class Login extends ModalComponent
 {
