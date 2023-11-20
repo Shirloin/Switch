@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transaction_headers', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid("user_id");
-            $table->date("date");
+        Schema::create('product_categories', function (Blueprint $table) {
+            $table->uuid("id")->primary();
+            $table->string("name");
             $table->timestamps();
-            $table->foreign("user_id")->references("id")->on("users")->onUpdate("CASCADE")->onDelete("CASCADE");
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaction_headers');
+        Schema::dropIfExists('product_categories');
     }
 };

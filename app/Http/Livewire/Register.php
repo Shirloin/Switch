@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use LivewireUI\Modal\ModalComponent;
+use Illuminate\Support\Str;
 
 class Register extends ModalComponent
 {
@@ -31,6 +32,7 @@ class Register extends ModalComponent
             return;
         }
         $user = new User();
+        $user->id = Str::uuid(36);
         $user->username = $this->username;
         $user->email = $this->email;
         $user->password = bcrypt($this->password);
