@@ -1,8 +1,8 @@
-<div class="w-full h-full flex flex-col justify-start items-start gap-4" >
+<div class="w-full h-full flex flex-col justify-start items-start gap-4">
     <div class="w-full h-full flex justify-between items-start text-lg gap-6 text-white">
         <div class="w-full flex ustify-start items-start gap-6">
-            <input
-                class="w-6 h-6 self-center checked:bg-purple-500 border-purple-500 bg-purple-200 rounded-sm ring-1 ring-purple-500"
+            <input wire:model='isChecked'  wire:click="check"
+                class="w-5 h-5 self-center checked:bg-purple-500 border-purple-500 bg-purple-200 rounded-sm ring-1 ring-purple-500"
                 type="checkbox">
             <img class="w-24 h-24 rounded-md object-cover" src="{{ $product->image }}" alt="">
             <div class="flex flex-col justify-start items-start">
@@ -19,23 +19,21 @@
                 </svg>
             </button>
             <div class="flex justify-center items-center gap-4 text-white">
-                <button wire:click="min"
-                    class="disabled:cursor-not-allowed disabled:text-gray-200">
+                <button wire:click="min" class="disabled:cursor-not-allowed disabled:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </button>
-                {{-- <input  x-model="quantity" class="hidden" x-bind="quantity" x-bind:value="" type="number"> --}}
-                <h1>{{$quantity}}</h1>
-                    <button wire:click='add' >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </button>
+                <h1>{{ $quantity }}</h1>
+                <button wire:click='add'>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </button>
             </div>
         </div>
     </div>

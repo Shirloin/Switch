@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Auth
+Route::POST('/logout', [AuthController::class, 'logout']);
+
 Route::get('/', function () {
     return view('pages.home.home');
 });
@@ -23,3 +28,6 @@ Route::get('/product-detail/{id}', [ProductController::class, 'detail']);
 
 // Cart
 Route::GET('/cart', [CartController::class, 'index']);
+
+// Shop
+Route::GET('/shop', [ShopController::class, 'index']);

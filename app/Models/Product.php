@@ -27,4 +27,7 @@ class Product extends Model
     public function User(){
         return $this->belongsTo(User::class, "user_id");
     }
+    public function TransactionDetails(){
+        return $this->hasMany(TransactionDetail::class);
+    }
 }

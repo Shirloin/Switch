@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('price');
             $table->string('description');
-            $table->integer('stock');
+            $table->integer('stock')->default(50);
             $table->string('image')->default('https://source.unsplash.com/random');
             $table->uuid("user_id");
             $table->uuid("product_category_id");

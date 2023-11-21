@@ -12,6 +12,7 @@ class CartCard extends Component
     public $cart;
     public $product;
     public $quantity;
+    public $isChecked;
     public function mount($cart)
     {
         $this->quantity = $cart->quantity;
@@ -44,6 +45,14 @@ class CartCard extends Component
             $cart->delete();
             $this->emitUp('refresh');
         }
+    }
+
+    public function check()
+    {
+        // $this->isChecked = !$this->isChecked;
+        $totalPrice = $this->quantity * $this->product->price;
+
+        $this->emitUp('cartChecked', $totalPrice, $this->product->id, $this->isChecked);
     }
 
     public function render()

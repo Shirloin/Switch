@@ -10,6 +10,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "livewire-ui/modal": "^1.0",
         "mbezhanov/faker-provider-collection": "^2.0",
         "wire-elements/modal": "^1.0",
         "yoeunes/toastr": "^2.3"

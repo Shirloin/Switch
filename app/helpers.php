@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 if(!function_exists('formatPrice')) {
     function formatPrice($price): string
     {
-        return number_format($price, 0, ',', '.');
+        return number_format($price, 0, ',', ',');
     }
 }
 
