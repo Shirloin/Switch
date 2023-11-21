@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="h-full flex justify-end items-end gap-8 self-end">
-            <button>
+            <button wire:click="destroy">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -28,15 +28,14 @@
                     </svg>
                 </button>
                 {{-- <input  x-model="quantity" class="hidden" x-bind="quantity" x-bind:value="" type="number"> --}}
-                <h1>{{$cart->quantity}}</h1>
-                <button wire:click="add({{$product->id}})" >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-
-                </button>
+                <h1>{{$quantity}}</h1>
+                    <button wire:click='add' >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </button>
             </div>
         </div>
     </div>

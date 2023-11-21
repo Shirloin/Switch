@@ -12,7 +12,9 @@ class Cart extends Model
     protected $table = "carts";
     public $incrementing = false;
     protected $keyType = 'string';
-    protected $primaryKey = null;
+    protected $primaryKey = "product_id";
+    // protected $primaryKey = ["user_id", "product_id"];
+    public $timestamps = false;
     protected $casts = [
         "user_id" => "string",
         "product_id" => "string",
