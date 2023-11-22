@@ -32,7 +32,7 @@ class Login extends ModalComponent
         else{
             toastr()->success('Login Success', '', ['positionClass' => 'toast-bottom-right', 'timeOut' => 2000,]);
         }
-        return redirect()->back();
+        return redirect('/');
     }
 
     public function render()

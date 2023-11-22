@@ -11,7 +11,7 @@ class TransactionHistory extends Component
     public $transactions;
     public function mount(){
         $user = Auth::user();
-        $this->transactions = TransactionHeader::where("user_id", $user->id)->get();
+        $this->transactions = TransactionHeader::where("user_id", $user->id)->orderBy('created_at', 'desc')->get();
     }
     public function render()
     {

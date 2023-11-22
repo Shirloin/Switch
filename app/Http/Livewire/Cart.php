@@ -7,6 +7,7 @@ use App\Models\Cart as CartModel;
 use App\Models\Product;
 use App\Models\TransactionDetail;
 use App\Models\TransactionHeader;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -62,8 +63,8 @@ class Cart extends Component
         $header = new TransactionHeader();
         $header->id = Str::uuid(36);
         $header->user_id = $user->id;
-        $header->date = now();
-        $header->time = now();
+        $header->date = Carbon::now()->tz('Asia/Jakarta');
+        $header->time = Carbon::now()->tz('Asia/Jakarta');
         $header->save();
         foreach ($this->checkedItems as $productId => $quantity) {
             $product = Product::find($productId);
@@ -78,6 +79,7 @@ class Cart extends Component
             ->delete();
         $this->refresh();
         Controller::SuccessMessage("Checkout success");
+        $this->totalPrice = 0;
     }
     public function render()
     {

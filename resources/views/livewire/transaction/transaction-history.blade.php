@@ -1,4 +1,9 @@
 <div class="max-w-7xl w-full h-full grid grid-cols-3 justify-start items-start gap-8">
+    @if(count($transactions) == 0)
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex ">
+            <h1 class="text-5xl font-semibold text-white">There is no transaction</h1>
+        </div>
+    @endif
     @foreach ($transactions as $th)
         <div
             class=" rounded-md bg-slate-600 flex flex-col justify-start items-start p-4 box-border gap-4 text-white">

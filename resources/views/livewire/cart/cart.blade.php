@@ -1,5 +1,6 @@
 <div class="max-w-7xl w-full h-full flex justify-center items-start gap-12">
-    @if (count($carts)>0)
+
+    @if (count($carts) > 0)
         <div class="w-3/5 h-full flex flex-col justify-start items-start rounded-md gap-8">
             <h1 class="font-bold text-3xl text-white">Cart</h1>
             @foreach ($carts as $cart)
@@ -14,12 +15,13 @@
                 </div>
                 <hr class="w-full ring-0.5 ring-white">
             </div>
-            <button wire:click="buy" class="w-full rounded-md bg-purple-500 text-white text-md font-bold p-2 hover:bg-purple-700 transition-all duration-200">Buy</button>
+            <button wire:click="buy"
+                class="w-full rounded-md bg-purple-500 text-white text-md font-bold p-2 hover:bg-purple-700 transition-all duration-200">Buy</button>
         </div>
     @else
-    <h1 class="font-bold text-3xl text-white self-center">Cart is empty</h1>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex ">
+            <h1 class="text-5xl font-semibold text-white">Cart is empty</h1>
+        </div>
     @endif
 </div>
-<script>
-
-</script>
+<script></script>

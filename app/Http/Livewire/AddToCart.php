@@ -2,7 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\TransactionDetail;
+use App\Models\TransactionHeader;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -35,6 +39,7 @@ class AddToCart extends Component
             $cart->quantity += $this->quantity;
             $cart->save();
         }
+        $this->quantity = 1;
         toastr()->success('Add To Cart Success', '', ['positionClass' => 'toast-bottom-right', 'timeOut' => 2000,]);
         return redirect()->back();
     }
@@ -43,6 +48,21 @@ class AddToCart extends Component
             $this->emit('openModal', 'login');
             return;
         }
+        $user = Auth::user();
+        $header = new TransactionHeader();
+        $header->id = Str::uuid(36);
+        $header->user_id = $user->id;
+        $header->date = Carbon::now()->tz('Asia/Jakarta');
+        $header->time = Carbon::now()->tz('Asia/Jakarta');
+        $header->save();
+        $detail = new TransactionDetail();
+        $detail->transaction_id = $header->id;
+        $detail->product_id = $this->product->id;
+        $detail->quantity = $this->quantity;
+        $detail->save();
+        Controller::SuccessMessage("Success to buy product");
+        $this->quantity = 1;
+        return redirect()->back();
     }
     public function render()
     {

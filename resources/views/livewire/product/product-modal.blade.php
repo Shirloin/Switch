@@ -22,7 +22,7 @@
     </div>
     <div class="w-full flex flex-col gap-2">
         <label for="">Product Price</label>
-        <input wire:model="price" class="modal-input w-full" type="text" value="{{$price}}">
+        <input wire:model="price" class="modal-input w-full" type="number" value="{{$price}}">
     </div>
     <div class="w-full flex flex-col gap-2">
         <label for="">Product Description</label>
