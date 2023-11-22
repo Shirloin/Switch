@@ -2,15 +2,14 @@
     {{-- <h1 class="w-full text-3xl font-bold text-black">Edit Product</h1> --}}
     <div class="relative group w-full flex flex-col rounded-md justify-center items-center gap-2">
         <img class="w-full h-40 rounded-md object-contain" src="{{ $image }}" alt="">
-        <div class="group-hover:flex justify-center items-center absolute bg-gray-500 bg-opacity-50 hidden  w-full h-full"
+        <form wire:submit.prevent='uploadImage' class="group-hover:flex justify-center items-center absolute bg-gray-500 bg-opacity-50 hidden  w-full h-full"
             id="fileUploadForm" enctype="multipart/form-data">
 
             <label class="w-full h-full rounded-md cursor-pointer flex justify-center items-center">
-                <input name="file" class="hidden" type="file" accept="image/jpeg, .jpeg, .jpg, image/png, .png"
-                    onchange="uploadFile()">
+                <input wire:model='photo' name="file" class="hidden" type="file" accept="image/jpeg, .jpeg, .jpg, image/png, .png" onchange="Livewire.emit('fileChosen')">
                 <h1 class="text-lg text-white font-semibold">Choose Image</h1>
             </label>
-        </div>
+        </form>
     </div>
     <div class="w-full flex flex-col gap-2">
         <label for="">Product Name</label>
@@ -65,3 +64,8 @@
     </div>
 
 </div>
+<script>
+    function uploadFile() {
+        Livewire.emit('fileChosen');
+    }
+</script>

@@ -5,19 +5,23 @@ namespace App\Http\Livewire;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Services\FirebaseService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 use Illuminate\Support\Str;
+use Livewire\WithFileUploads;
 
 class AddProductModal extends ModalComponent
 {
-    protected $listeners = ['updateCategory' => 'setCategory'];
+    use WithFileUploads;
+    protected $listeners = ['updateCategory' => 'setCategory', 'fileChosen' => 'uploadImage'];
     public $name;
     public $price;
     public $description;
     public $image = "https://dmarket.com/blog/dota2-skins-best-sellers-2020/1.jpg";
+    public $photo;
     public $category;
     public $search = '';
     public function render()
@@ -52,6 +56,19 @@ class AddProductModal extends ModalComponent
         $this->emit('all');
         Controller::SuccessMessage("Add product success");
         $this->closeModal();
+    }
+    public function uploadImage(){
+        $this->validate([
+            'photo' => 'required|image|max:10240',
+        ]);
+        $res = FirebaseService::uploadFile("images", $this->photo);
+        if($res==null){
+            Controller::FailMessage("Upload Image Failed");
+            return;
+        }
+        $this->image = $res;
+        FirebaseService::deleteFile("images", $this->image);
+        Controller::SuccessMessage("Upload Image Success");
     }
 
     public function setCategory($categoryId)
