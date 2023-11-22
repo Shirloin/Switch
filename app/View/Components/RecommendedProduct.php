@@ -15,7 +15,7 @@ class RecommendedProduct extends Component
     public $products;
     public function __construct()
     {
-        $this->products = Product::inRandomOrder()->take(8)->get();
+        $this->products = Product::inRandomOrder()->take(10)->get();
     }
 
     /**
