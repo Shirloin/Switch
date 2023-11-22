@@ -1,7 +1,7 @@
-<div class="max-w-5xl w-full h-full flex flex-wrap justify-start items-start gap-12">
+<div class="max-w-7xl w-full h-full grid grid-cols-3 justify-start items-start gap-8">
     @foreach ($transactions as $th)
         <div
-            class="w-1/2 rounded-md bg-slate-600 flex flex-col justify-start items-start p-4 box-border gap-4 text-white">
+            class=" rounded-md bg-slate-600 flex flex-col justify-start items-start p-4 box-border gap-4 text-white">
             <div class="w-full flex justify-start items-center gap-4" class="font-semibold">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="#ffffff" class="w-6 h-6">
@@ -10,9 +10,10 @@
                 </svg>
                 <h1>Transaction</h1>
                 <h1>{{ $th->date }}</h1>
+                <h1>{{ $th->time }}</h1>
             </div>
-            <div class="relative w-full flex flex-col justify-center items-start gap-4" x-data="{ isOpen: false }">
-                <button @click="isOpen = !isOpen"
+            <div class="relative w-full flex flex-col justify-center items-center gap-4" x-data="{ isOpen: false }">
+                <button @click="isOpen = !isOpen" @click.away="isOpen = false"
                     class="w-full rounded-md bg-gray-300 p-2 text-black font-semibold flex justify-between">
                     <h1>Transaction Details</h1>
                     <div>
@@ -33,7 +34,7 @@
                         x-transition:leave="transition ease-out duration-300"
                         x-transition:leave-start="transform translate-y-0 opacity-100"
                         x-transition:leave-end="transform translate-y-[-10%] opacity-0"
-                        class="absolute z-10 w-full  left-0 bg-gray-300 text-black p-4 flex flex-col  gap-4 shadow-md rounded-md text-sm font-normal text-start">
+                        class="absolute z-10 w-full max-h-60 overflow-y-auto  left-0 bg-gray-300 text-black p-4 flex flex-col  gap-4 shadow-md rounded-md text-sm font-normal text-start">
                         @foreach ($th->TransactionDetails as $td)
                             <div class="w-full flex justify-start items-start gap-2 ">
                                 <img class="w-36 h-24 rounded-md object-cover" src="{{ $td->Product->image }}"

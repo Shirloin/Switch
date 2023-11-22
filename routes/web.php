@@ -18,23 +18,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Auth
-Route::POST('/logout', [AuthController::class, 'logout']);
 
 Route::get('/', function () {
     return view('pages.home.home');
 });
 Route::get('/product-detail/{id}', [ProductController::class, 'detail']);
 
+Route::middleware(['guest'])->group(function(){
+    // Auth
+    Route::POST('/logout', [AuthController::class, 'logout']);
+    // Cart
+    Route::GET('/cart', [CartController::class, 'index']);
 
-// Cart
-Route::GET('/cart', [CartController::class, 'index']);
+    // Shop
+    Route::GET('/shop', [ShopController::class, 'index']);
+    // Transaction
+    Route::GET('/transaction', [TransactionHeaderController::class, 'index']);
+});
 
-// Shop
-Route::GET('/shop', [ShopController::class, 'index']);
+
 
 // Search
-// Route::GET('/search', [S])
+Route::GET('/search', [ProductController::class, 'index']);
 
-// Transaction
-Route::GET('/transaction', [TransactionHeaderController::class, 'index']);

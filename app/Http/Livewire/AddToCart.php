@@ -15,6 +15,10 @@ class AddToCart extends Component
         $this->product = $product;
     }
     public function store(){
+        if (auth()->guest()) {
+            $this->emit('openModal', 'login');
+            return;
+        }
         $user = Auth::user();
         $cart = Cart::where("user_id", auth()->user()->id)
                     ->where("product_id", $this->product->id)
@@ -33,6 +37,12 @@ class AddToCart extends Component
         }
         toastr()->success('Add To Cart Success', '', ['positionClass' => 'toast-bottom-right', 'timeOut' => 2000,]);
         return redirect()->back();
+    }
+    public function buy(){
+        if (auth()->guest()) {
+            $this->emit('openModal', 'login');
+            return;
+        }
     }
     public function render()
     {

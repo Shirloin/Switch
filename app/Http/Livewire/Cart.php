@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\Controller;
 use App\Models\Cart as CartModel;
 use App\Models\Product;
 use App\Models\TransactionDetail;
@@ -14,7 +15,7 @@ class Cart extends Component
 {
     public $carts;
 
-    protected $listeners = ['refresh' => 'refresh', 'cartChecked' => 'updateTotal'];
+    protected $listeners = ['refresh' => 'refresh', 'cartChecked' => 'updateTotal', 'update' => 'update'];
     public $totalPrice = 0;
     public $checkedItems = [];
     public function mount()
@@ -39,10 +40,22 @@ class Cart extends Component
         }
     }
 
+    public function update(){
+        $this->totalPrice = 0;
+        foreach($this->carts as $c){
+            $price = $c->Product->price;
+            $this->totalPrice += $c->quantity * $price;
+        }
+    }
+
     public function buy()
     {
+        if (auth()->guest()) {
+            $this->emit('openModal', 'login');
+            return;
+        }
         if(count($this->checkedItems)==0){
-            toastr()->error('There is no selected product', '', ['positionClass' => 'toast-bottom-right', 'timeOut' => 2000,]);
+            Controller::FailMessage("There is no selected product");
             return;
         }
         $user = Auth::user();
@@ -50,6 +63,7 @@ class Cart extends Component
         $header->id = Str::uuid(36);
         $header->user_id = $user->id;
         $header->date = now();
+        $header->time = now();
         $header->save();
         foreach ($this->checkedItems as $productId => $quantity) {
             $product = Product::find($productId);
@@ -63,6 +77,7 @@ class Cart extends Component
             ->whereIn('product_id', array_keys($this->checkedItems))
             ->delete();
         $this->refresh();
+        Controller::SuccessMessage("Checkout success");
     }
     public function render()
     {

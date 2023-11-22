@@ -8,7 +8,8 @@
         <div class="px-1 py-1 rounded-md ring-1 ring-black flex justify-between items-center gap-4">
             <button
                 class="p-1 rounded-md hover:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-200 disabled:hover:bg-transparent"
-                x-on:click="quantity > 1 ? quantity-- : null; $wire.set('quantity', quantity)" x-bind:disabled="quantity <= 1">
+                x-on:click="quantity > 1 ? quantity-- : null; $wire.set('quantity', quantity)"
+                x-bind:disabled="quantity <= 1">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
@@ -29,5 +30,5 @@
         <h1 class="font-bold text-lg" x-text="`Rp${(quantity * price).toLocaleString()}`"></h1>
     </div>
     <button wire:click='store' class=" p-2 bg-purple-700 text-md font-semibold rounded-md">Add To Cart</button>
-    <button class=" p-2 bg-white text-purple-700 ring-1 ring-purple-700 text-md font-semibold rounded-md">Buy</button>
+    <button wire:click='buy' class=" p-2 bg-white text-purple-700 ring-1 ring-purple-700 text-md font-semibold rounded-md">Buy</button>
 </div>

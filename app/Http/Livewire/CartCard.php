@@ -21,12 +21,13 @@ class CartCard extends Component
     }
     public function min()
     {
-        if($this->quantity > 1){
+        if ($this->quantity > 1) {
             $user = Auth::user();
             $this->quantity--;
             Cart::where("user_id", $user->id)
                 ->where("product_id", $this->product->id)
                 ->update(["quantity" => $this->quantity]);
+            $this->emit('update');
         }
     }
     public function add()
@@ -36,6 +37,7 @@ class CartCard extends Component
         Cart::where("user_id", $user->id)
             ->where("product_id", $this->product->id)
             ->update(["quantity" => $this->quantity]);
+        $this->emit('update');
     }
     public function destroy()
     {
@@ -46,6 +48,7 @@ class CartCard extends Component
             // dd($cart);
             $cart->delete();
             $this->emitUp('refresh');
+            $this->emit('update');
         }
     }
 
