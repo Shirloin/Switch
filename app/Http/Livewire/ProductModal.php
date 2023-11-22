@@ -4,17 +4,21 @@ namespace App\Http\Livewire;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Services\FirebaseService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Livewire\WithFileUploads;
 use LivewireUI\Modal\ModalComponent;
 
 class ProductModal extends ModalComponent
 {
+    use WithFileUploads;
     public $product;
     public $name;
     public $price;
     public $description;
     public $image;
+    public $photo;
     public function mount($product)
     {
         // $this->product = Product::find($productId);
@@ -43,6 +47,14 @@ class ProductModal extends ModalComponent
 
         $product = Product::find($this->product["id"]);
         if($product!=null){
+            if($this->photo){
+                $res = FirebaseService::uploadFile("images", $this->photo);
+                if($res==null){
+                    return;
+                }
+                $this->image = $res;
+                FirebaseService::deleteFile("images", $this->image);
+            }
             $product->name = $this->name;
             $product->price = $this->price;
             $product->description = $this->description;

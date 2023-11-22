@@ -33,15 +33,25 @@ class AddProductModal extends ModalComponent
     public function save()
     {
 
-        $validate = Validator::make(['name' => $this->name, 'price' => $this->price, 'description' => $this->description, 'category' => $this->category], [
+        $validate = Validator::make(['name' => $this->name, 'price' => $this->price, 'description' => $this->description, 'category' => $this->category,
+                'photo' => $this->photo], [
             'name' => 'required|min:3|max:50',
             'price' => 'required|min:1|numeric',
             'description' => 'required|min:5',
-            'category' => 'required'
+            'category' => 'required',
+            'photo' => 'required|file|max:10240',
         ]);
         if ($validate->fails()) {
             Controller::FailMessage($validate->errors()->first());
             return;
+        }
+        if($this->photo){
+            $res = FirebaseService::uploadFile("images", $this->photo);
+            if($res==null){
+                return;
+            }
+            $this->image = $res;
+            FirebaseService::deleteFile("images", $this->image);
         }
         $product = new Product();
         $product->id = Str::uuid();
@@ -56,19 +66,6 @@ class AddProductModal extends ModalComponent
         $this->emit('all');
         Controller::SuccessMessage("Add product success");
         $this->closeModal();
-    }
-    public function uploadImage(){
-        $this->validate([
-            'photo' => 'required|image|max:10240',
-        ]);
-        $res = FirebaseService::uploadFile("images", $this->photo);
-        if($res==null){
-            Controller::FailMessage("Upload Image Failed");
-            return;
-        }
-        $this->image = $res;
-        FirebaseService::deleteFile("images", $this->image);
-        Controller::SuccessMessage("Upload Image Success");
     }
 
     public function setCategory($categoryId)

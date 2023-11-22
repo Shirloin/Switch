@@ -1,15 +1,20 @@
 <div class="w-full p-4 flex flex-col justify-center items-center gap-4">
     {{-- <h1 class="w-full text-3xl font-bold text-black">Edit Product</h1> --}}
     <div class="relative group w-full flex flex-col rounded-md justify-center items-center gap-2">
-        <img class="w-full h-40 rounded-md object-contain" src="{{ $image }}" alt="">
-        <form wire:submit.prevent='uploadImage' class="group-hover:flex justify-center items-center absolute bg-gray-500 bg-opacity-50 hidden  w-full h-full"
-            id="fileUploadForm" enctype="multipart/form-data">
-
+        @if ($photo)
+            <img class="w-full h-40 rounded-md object-contain" src="{{ $photo->temporaryUrl() }}">
+        @else
+            <img class="w-full h-40 rounded-md object-contain" src="{{ $image }}" alt="">
+        @endif
+        <div
+            class="group-hover:flex justify-center items-center absolute bg-gray-500 bg-opacity-50 hidden  w-full h-full"
+            id="fileUploadForm">
             <label class="w-full h-full rounded-md cursor-pointer flex justify-center items-center">
-                <input wire:model='photo' name="file" class="hidden" type="file" accept="image/jpeg, .jpeg, .jpg, image/png, .png" onchange="Livewire.emit('fileChosen')">
+                <input wire:model='photo' name="file" class="hidden" type="file"
+                    accept="image/jpeg, .jpeg, .jpg, image/png, .png">
                 <h1 class="text-lg text-white font-semibold">Choose Image</h1>
             </label>
-        </form>
+        </div>
     </div>
     <div class="w-full flex flex-col gap-2">
         <label for="">Product Name</label>
@@ -39,14 +44,15 @@
         <input x-show="categoryDropdown" wire:model.live="search" type="text" placeholder="Search Category..."
             class="w-full input-style" x-model="searchQuery" @click.away="categoryDropdown = false">
 
-        <input wire:model="category" type="hidden" name="product_category" :value="selectedCategory" x-bind:value="selectedCategory">
+        <input wire:model="category" type="hidden" name="product_category" :value="selectedCategory"
+            x-bind:value="selectedCategory">
 
         <div class="relative w-full flex gap-4 justify-start mt-1 ">
             <div x-show="categoryDropdown"
                 class="absolute z-10 w-full max-h-40 overflow-y-auto left-0 bg-white shadow-md rounded-md text-sm font-normal text-start">
                 @foreach ($categories as $c)
                     <div class="w-full p-2 bg-white hover:bg-gray-300 rounded-md text-black text-md flex justify-start"
-                        @click.stop="selectedCategory = '{{ $c->id }}'; categoryDropdown = false; selectedCategoryName = '{{ $c->name }}'; $wire.emit('updateCategory', '{{$c->id}}')">
+                        @click.stop="selectedCategory = '{{ $c->id }}'; categoryDropdown = false; selectedCategoryName = '{{ $c->name }}'; $wire.emit('updateCategory', '{{ $c->id }}')">
                         <h1>{{ $c->name }}</h1>
                     </div>
                 @endforeach
@@ -64,8 +70,3 @@
     </div>
 
 </div>
-<script>
-    function uploadFile() {
-        Livewire.emit('fileChosen');
-    }
-</script>
