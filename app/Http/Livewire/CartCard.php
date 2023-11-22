@@ -21,11 +21,13 @@ class CartCard extends Component
     }
     public function min()
     {
-        $user = Auth::user();
-        $this->quantity--;
-        Cart::where("user_id", $user->id)
-            ->where("product_id", $this->product->id)
-            ->update(["quantity" => $this->quantity]);
+        if($this->quantity > 1){
+            $user = Auth::user();
+            $this->quantity--;
+            Cart::where("user_id", $user->id)
+                ->where("product_id", $this->product->id)
+                ->update(["quantity" => $this->quantity]);
+        }
     }
     public function add()
     {

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\TransactionHeaderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +32,9 @@ Route::GET('/cart', [CartController::class, 'index']);
 
 // Shop
 Route::GET('/shop', [ShopController::class, 'index']);
+
+// Search
+// Route::GET('/search', [S])
+
+// Transaction
+Route::GET('/transaction', [TransactionHeaderController::class, 'index']);

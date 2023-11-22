@@ -30,7 +30,7 @@ class ProductModal extends ModalComponent
     }
     public function render()
     {
-        return view('livewire.product-modal');
+        return view('livewire.product.product-modal');
     }
 
     public function save(){

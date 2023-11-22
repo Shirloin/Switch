@@ -1,14 +1,13 @@
 <div class="w-full p-4 flex flex-col justify-center items-center gap-4">
     {{-- <h1 class="w-full text-3xl font-bold text-black">Edit Product</h1> --}}
-    <div class="relative group w-full flex flex-col rounded-md justify-center items-center gap-2">
+    <div class="relative group w-60 flex flex-col justify-center items-center gap-2">
         @if ($photo)
-            <img class="w-full h-40 rounded-md object-contain" src="{{ $photo->temporaryUrl() }}">
+            <img class=" w-full h-40 rounded-md object-cover" src="{{ $photo->temporaryUrl() }}">
         @else
-            <img class="w-full h-40 rounded-md object-contain" src="{{ $image }}" alt="">
+            <img class=" w-full h-40 rounded-md object-cover" src="{{ $image }}" alt="">
         @endif
         <div
-            class="group-hover:flex justify-center items-center absolute bg-gray-500 bg-opacity-50 hidden  w-full h-full"
-            id="fileUploadForm">
+            class="group-hover:flex justify-center items-center absolute rounded-md bg-black bg-opacity-30 hidden  w-full h-full">
             <label class="w-full h-full rounded-md cursor-pointer flex justify-center items-center">
                 <input wire:model='photo' name="file" class="hidden" type="file"
                     accept="image/jpeg, .jpeg, .jpg, image/png, .png">

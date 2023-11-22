@@ -27,7 +27,7 @@ class AddProductModal extends ModalComponent
     public function render()
     {
         $categories = ProductCategory::search($this->search)->get();
-        return view('livewire.add-product-modal', ['categories' => $categories]);
+        return view('livewire.product.add-product-modal', ['categories' => $categories]);
     }
 
     public function save()

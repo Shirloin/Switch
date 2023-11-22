@@ -10,6 +10,7 @@ class TransactionHeader extends Model
     use HasFactory;
     protected $table = "transaction_headers";
     public $incrementing = false;
+    protected $primaryKey = 'id';
     protected $keyType = 'string';
     protected $cast = [
         "id" => "string",
@@ -22,7 +23,7 @@ class TransactionHeader extends Model
         "date"
     ];
     public function TransactionDetails(){
-        return $this->hasMany(TransactionDetail::class);
+        return $this->hasMany(TransactionDetail::class, "transaction_id");
     }
     public function User(){
         return $this->belongsTo(User::class, "user_id");

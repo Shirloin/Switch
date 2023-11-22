@@ -4,7 +4,7 @@
             <input wire:model='isChecked'  wire:click="check"
                 class="w-5 h-5 self-center checked:bg-purple-500 border-purple-500 bg-purple-200 rounded-sm ring-1 ring-purple-500"
                 type="checkbox">
-            <img class="w-24 h-24 rounded-md object-cover" src="{{ $product->image }}" alt="">
+            <img class="w-36 h-24 rounded-md object-cover" src="{{ $product->image }}" alt="">
             <div class="flex flex-col justify-start items-start">
                 <h1>{{ $product->name }}</h1>
                 <h1 class="font-bold ">Rp{{ formatPrice($product->price) }}</h1>
@@ -19,7 +19,9 @@
                 </svg>
             </button>
             <div class="flex justify-center items-center gap-4 text-white">
-                <button wire:click="min" class="disabled:cursor-not-allowed disabled:text-gray-200">
+                <button wire:click="min" class="disabled:cursor-not-allowed disabled:text-gray-200"
+                {{ $quantity <= 1 ? 'disabled' : '' }}
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"

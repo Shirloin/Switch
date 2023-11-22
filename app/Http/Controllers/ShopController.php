@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 class ShopController extends Controller
 {
     public function index(){
-        // $products = Product::find(auth()->user()->id);
-        $products = Product::all();
+        $products = Product::where("user_id", auth()->user()->id)->get();
+        // $products = Product::all();
         return view('pages.shop.shop', ['products' => $products]);
     }
 }

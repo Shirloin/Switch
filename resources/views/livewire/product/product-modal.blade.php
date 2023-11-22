@@ -1,5 +1,8 @@
 <div class="w-full p-10 flex flex-col justify-center items-center gap-4">
-    <h1 class="w-full text-3xl font-bold text-black">Edit Product</h1>
+    <div class="w-full flex flex-col justify-center items-center gap-1">
+        <h1 class="w-full text-3xl font-bold text-black">Edit Product</h1>
+        <hr class="w-full border-b-1 border-gray-500">
+    </div>
     <div class="relative group w-60 flex flex-col justify-center items-center gap-2">
         @if ($photo)
             <img class="w-full h-40 rounded-md object-cover" src="{{ $photo->temporaryUrl() }}">

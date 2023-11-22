@@ -10,6 +10,7 @@ class TransactionDetail extends Model
     use HasFactory;
     protected $table = "transaction_details";
     public $incrementing = false;
+    protected $primaryKey = "transaction_id";
     protected $keyType = 'string';
     protected $fillable = [
         "transaction_id",
@@ -22,7 +23,7 @@ class TransactionDetail extends Model
         "quantity" => "integer"
     ];
     public function TransactionHeader(){
-        return $this->belongsTo(TransactionHeader::class, "transaction_id");
+        return $this->belongsTo(TransactionHeader::class, "transaction_id", "id");
     }
     public function Product(){
         return $this->belongsTo(Product::class, "product_id");

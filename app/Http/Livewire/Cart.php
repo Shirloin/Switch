@@ -51,7 +51,6 @@ class Cart extends Component
         $header->user_id = $user->id;
         $header->date = now();
         $header->save();
-
         foreach ($this->checkedItems as $productId => $quantity) {
             $product = Product::find($productId);
             TransactionDetail::create([

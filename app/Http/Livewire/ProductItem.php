@@ -20,6 +20,6 @@ class ProductItem extends Component
 
     public function render()
     {
-        return view('livewire.product-item');
+        return view('livewire.product.product-item');
     }
 }
